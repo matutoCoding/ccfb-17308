@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="data:," />
+  <title>圆顶-望远镜整夜推演系统</title>
+  <style>
+    :root {
+      --bg: #0d1117; --panel: #161b22; --border: #30363d;
+      --fg: #e6edf3; --dim: #8b949e; --accent: #58a6ff;
+      --warn: #f0883e; --danger: #f85149; --ok: #3fb950;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.5 "Segoe UI", "Microsoft YaHei", sans-serif; }
+    nav { display: flex; gap: 2px; background: var(--panel); border-bottom: 1px solid var(--border); padding: 0 12px; }
+    nav a { color: var(--dim); text-decoration: none; padding: 12px 16px; border-bottom: 2px solid transparent; }
+    nav a.active { color: var(--fg); border-bottom-color: var(--accent); }
+    nav .brand { color: var(--fg); font-weight: 600; padding: 12px 16px 12px 0; }
+    #app { padding: 16px; max-width: 1600px; margin: 0 auto; }
+    .panel { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 14px; }
+    .panel h3 { margin: 0 0 10px; font-size: 15px; }
+    .row { display: flex; gap: 14px; flex-wrap: wrap; }
+    .row > * { flex: 1; min-width: 0; }
+    table { border-collapse: collapse; width: 100%; font-size: 13px; }
+    th, td { border: 1px solid var(--border); padding: 5px 8px; text-align: left; }
+    th { background: #1c2129; color: var(--dim); font-weight: 500; }
+    input, select, textarea { background: #0d1117; color: var(--fg); border: 1px solid var(--border); border-radius: 5px; padding: 4px 7px; font: inherit; }
+    input[type=number] { width: 90px; }
+    button { background: #21262d; color: var(--fg); border: 1px solid var(--border); border-radius: 6px; padding: 6px 14px; cursor: pointer; font: inherit; }
+    button:hover { border-color: var(--dim); }
+    button.primary { background: #1f6feb; border-color: #1f6feb; }
+    button.danger { color: var(--danger); }
+    button:disabled { opacity: 0.4; cursor: default; }
+    label.f { display: inline-flex; flex-direction: column; font-size: 12px; color: var(--dim); margin: 3px 6px 3px 0; }
+    .grayed { color: var(--dim); background: #12161c; }
+    .tag { display: inline-block; padding: 1px 7px; border-radius: 9px; font-size: 12px; }
+    .tag.ok { background: #12261e; color: var(--ok); }
+    .tag.warn { background: #2d2113; color: var(--warn); }
+    .tag.danger { background: #2d1517; color: var(--danger); }
+    .view3d { position: relative; width: 100%; height: 520px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+    .view3d.occluded { box-shadow: inset 0 0 0 4px var(--danger); }
+    .view3d .hud { position: absolute; top: 8px; left: 10px; font-size: 12px; color: var(--fg); text-shadow: 0 1px 2px #000; pointer-events: none; white-space: pre; }
+    .view3d .occlabel { position: absolute; top: 8px; right: 10px; color: var(--danger); font-weight: 600; text-shadow: 0 1px 2px #000; }
+    canvas.plot { width: 100%; height: 180px; background: #0d1117; border: 1px solid var(--border); border-radius: 6px; }
+    .evlist { max-height: 420px; overflow-y: auto; }
+    .evitem { padding: 6px 8px; border-bottom: 1px solid var(--border); cursor: pointer; font-size: 13px; }
+    .evitem:hover { background: #1c2129; }
+    .evitem.sel { background: #1f2a3d; }
+    .muted { color: var(--dim); }
+    input[type=range] { width: 100%; }
+    .toolbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+  </style>
+  <script type="module" crossorigin src="/assets/index-zfIETyza.js"></script>
+</head>
+<body>
+  <nav id="nav">
+    <span class="brand">🔭 圆顶整夜推演</span>
+    <a href="#/domes" data-page="domes">圆顶档案</a>
+    <a href="#/telescopes" data-page="telescopes">望远镜装配</a>
+    <a href="#/plan" data-page="plan">观测计划</a>
+    <a href="#/simulate" data-page="simulate">整夜推演</a>
+    <a href="#/review" data-page="review">碰撞复核</a>
+  </nav>
+  <div id="app"></div>
+</body>
+</html>
